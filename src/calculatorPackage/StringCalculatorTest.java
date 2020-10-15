@@ -9,4 +9,11 @@ public class StringCalculatorTest {
     public void shouldReturnZeroOnEmptyString(){
         assertEquals(0,StringCalculator.add(""));
     }
+
+    @Test
+    public void shouldReturnNumberOnSingleDigit(){
+        assertEquals(7, StringCalculator.add("7"));
+        assertEquals(789, StringCalculator.add("7 8 9"));
+        assertEquals(789, StringCalculator.add("789"));
+    }
 }
