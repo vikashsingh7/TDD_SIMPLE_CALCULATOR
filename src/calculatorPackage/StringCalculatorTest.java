@@ -13,7 +13,7 @@ public class StringCalculatorTest {
     @Test
     public void shouldReturnNumberOnSingleDigit(){
         assertEquals(7, StringCalculator.add("7"));
-        assertEquals(789, StringCalculator.add("7 8 9"));
+        assertEquals(789, StringCalculator.add("7 8 9"));   // Check if the program is able to handle spaces in input
         assertEquals(789, StringCalculator.add("789"));
     }
 
@@ -32,4 +32,10 @@ public class StringCalculatorTest {
         assertEquals(98683, StringCalculator.add("9,37,6,87,6873,6,8,14,60,45,4,23,2345,34,3434,85667,6,22,3"));
     }
 
+    @Test
+    public void shouldRecognizeNewlines(){
+        assertEquals(6,StringCalculator.add("1\n2,3"));
+        assertEquals(597,StringCalculator.add("\n\n231\n22\n344"));
+
+    }
 }
