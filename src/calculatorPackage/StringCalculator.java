@@ -2,13 +2,12 @@ package calculatorPackage;
 
 import customException.InvalidNumberException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class StringCalculator {
 
+    static int CALLED_COUNT = 0;
     public static int add(String numbers){
 
+        CALLED_COUNT++;
         String[] numberArray;
         String delimiter = ","; //Setting Comma as the Default Delimiter unless user changes it.
         if(numbers.isEmpty()){
@@ -31,14 +30,7 @@ public class StringCalculator {
         return -1;  //Return -1 in case any Exception Occurs
     }
 
-//    private static String replaceSymbolsFromString(String text, String fromSymbol, String toSymbol){
-//        if(text.contains(fromSymbol)){
-//            text = text.replaceAll(fromSymbol, toSymbol);
-//        }
-//        return text;
-//    }
-
-    private static int add(String textArray[]) throws InvalidNumberException {
+    private static int add(String[] textArray) throws InvalidNumberException {
         int result=0;
         boolean negativeFlag = false;
         StringBuilder negativeNumber = new StringBuilder();
@@ -56,6 +48,10 @@ public class StringCalculator {
             throw new InvalidNumberException("Negatives Not Allowed: " + negativeNumber.toString().replaceFirst(".$",""));
         }
         return result;
+    }
+
+    public int getCalledCount(){
+        return CALLED_COUNT;
     }
 
     private static String[] splitNumbers(String text, String divider){

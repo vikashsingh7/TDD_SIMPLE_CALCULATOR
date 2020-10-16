@@ -1,5 +1,6 @@
-package calculatorPackage;
+package calculatorTestPackage;
 
+import calculatorPackage.StringCalculator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -7,7 +8,7 @@ public class StringCalculatorTest {
 
     @Test
     public void shouldReturnZeroOnEmptyString(){
-        assertEquals(0,StringCalculator.add(""));
+        assertEquals(0, StringCalculator.add(""));
     }
 
     @Test
@@ -54,10 +55,21 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void shouldHandleMultipleNeagtiveNumbers(){
+    public void shouldHandleMultipleNegativeNumbers(){
         assertEquals(-1,StringCalculator.add("-12,-1,45"));
         assertEquals(-1,StringCalculator.add("-2,-1,-5"));
         assertEquals(-1,StringCalculator.add("2,-1,-5"));
         assertEquals(-1,StringCalculator.add("//!\n-1!1!-1"));
+    }
+
+    @Test
+    public void shouldReturnCalledCount(){
+        StringCalculator stringCalculator = new StringCalculator();
+        assertEquals(0,stringCalculator.getCalledCount());
+        assertEquals(-1,StringCalculator.add("-12,-1,45"));
+        assertEquals(1,stringCalculator.getCalledCount());
+        assertEquals(444, StringCalculator.add("93,68,99,151,33"));
+        assertEquals(7100, StringCalculator.add("9,37,6,87,6873,6,8,14,60"));
+        assertEquals(3,stringCalculator.getCalledCount());
     }
 }
