@@ -1,5 +1,7 @@
 package calculatorPackage;
 
+import customException.InvalidNumberException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,8 +21,14 @@ public class StringCalculator {
                 numbers = numbers.substring(4);
             }
             numberArray = splitNumbers(numbers,delimiter);
-            return add(numberArray);
+            try{
+                return add(numberArray);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
+        return -1;  //Return -1 in case any Exception Occurs
     }
 
 //    private static String replaceSymbolsFromString(String text, String fromSymbol, String toSymbol){
@@ -30,16 +38,15 @@ public class StringCalculator {
 //        return text;
 //    }
 
-    private static int add(String textArray[]){
+    private static int add(String textArray[]) throws InvalidNumberException {
         int result=0;
         for (String item: textArray) {
             if(!item.isEmpty()) {
-                try {
-                    result += Integer.parseInt(item);
+                if(item.contains("-")){
+                    String negativeNumber = item.substring(item.indexOf('-'));
+                    throw new InvalidNumberException("Negatives Not Allowed: " + negativeNumber);
                 }
-                catch (Exception e){
-                    System.out.println("Illegal Symbol Present!");
-                }
+                result += Integer.parseInt(item);
             }
         }
         return result;

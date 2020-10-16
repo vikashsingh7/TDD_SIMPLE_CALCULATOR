@@ -44,4 +44,12 @@ public class StringCalculatorTest {
         assertEquals(3,StringCalculator.add("//;\n1;2"));
         assertEquals(3,StringCalculator.add("//!\n1!1!1"));
     }
+
+    @Test
+    public void shouldThrowExceptionOnNegativeNumbers(){
+        assertEquals(-1,StringCalculator.add("2,-145"));
+        assertEquals(-1,StringCalculator.add("-142,145"));
+        assertEquals(-1,StringCalculator.add("-12,-1,45"));
+        assertEquals(-1,StringCalculator.add("//;\n1;-2"));
+    }
 }
