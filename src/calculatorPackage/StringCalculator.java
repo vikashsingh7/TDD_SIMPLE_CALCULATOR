@@ -7,16 +7,21 @@ public class StringCalculator {
     public static int add(String numbers){
 
         String[] numberArray;
+        String delimiter = ","; //Setting Comma as the Default Delimiter unless user changes it.
         if(numbers.isEmpty()){
             return 0;
         }
-        else if(numbers.contains("\n")){
-            numbers = replaceSymbolsFromString(numbers,"\n",",");
+        if(numbers.contains("\n")){
+            numbers = replaceSymbolsFromString(numbers,"\n",delimiter);
         }
-        else if(numbers.contains(" ")){
+        if(numbers.contains(" ")){
             numbers = replaceSymbolsFromString(numbers," ","");
         }
-        else if(!numbers.contains(",")){
+        if(numbers.startsWith("//")){
+            delimiter = Character.toString(numbers.charAt(2));
+            numbers = numbers.substring(4);
+        }
+        if(!numbers.contains(delimiter)){
             try{
                 return Integer.parseInt(numbers);
             }
@@ -24,7 +29,7 @@ public class StringCalculator {
                 System.out.println("Some Other Symbol Present");
             }
         }
-        numberArray = splitNumbers(numbers,",");
+        numberArray = splitNumbers(numbers,delimiter);
         return add(numberArray);
     }
 

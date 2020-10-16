@@ -38,4 +38,10 @@ public class StringCalculatorTest {
         assertEquals(597,StringCalculator.add("\n\n231\n22\n344"));
 
     }
+
+    @Test
+    public void shouldSupportDifferentDelimiters(){
+        assertEquals(3,StringCalculator.add("//;\n1;2"));
+        assertEquals(3,StringCalculator.add("//!\n1!1!1"));
+    }
 }
