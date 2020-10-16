@@ -52,4 +52,12 @@ public class StringCalculatorTest {
         assertEquals(-1,StringCalculator.add("-12,-1,45"));
         assertEquals(-1,StringCalculator.add("//;\n1;-2"));
     }
+
+    @Test
+    public void shouldHandleMultipleNeagtiveNumbers(){
+        assertEquals(-1,StringCalculator.add("-12,-1,45"));
+        assertEquals(-1,StringCalculator.add("-2,-1,-5"));
+        assertEquals(-1,StringCalculator.add("2,-1,-5"));
+        assertEquals(-1,StringCalculator.add("//!\n-1!1!-1"));
+    }
 }

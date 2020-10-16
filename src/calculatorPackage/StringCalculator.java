@@ -40,14 +40,20 @@ public class StringCalculator {
 
     private static int add(String textArray[]) throws InvalidNumberException {
         int result=0;
+        boolean negativeFlag = false;
+        StringBuilder negativeNumber = new StringBuilder();
         for (String item: textArray) {
             if(!item.isEmpty()) {
                 if(item.contains("-")){
-                    String negativeNumber = item.substring(item.indexOf('-'));
-                    throw new InvalidNumberException("Negatives Not Allowed: " + negativeNumber);
+                    negativeFlag = true;
+                    negativeNumber.append(item.substring(item.indexOf('-'))).append(",");
+                    continue;
                 }
                 result += Integer.parseInt(item);
             }
+        }
+        if(negativeFlag){
+            throw new InvalidNumberException("Negatives Not Allowed: " + negativeNumber.toString().replaceFirst(".$",""));
         }
         return result;
     }
