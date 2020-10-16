@@ -1,5 +1,6 @@
 package calculatorPackage;
 
+import org.apache.commons.lang3.StringUtils;
 import customException.InvalidNumberException;
 
 public class StringCalculator {
@@ -16,10 +17,12 @@ public class StringCalculator {
         else{
             numbers = numbers.replaceAll(" ","");   //Replacing Blank Spaces
             if(numbers.startsWith("//")){
-                if(numbers.charAt(2) == '[' && numbers.contains("]")){
-                    delimiter = numbers.substring(numbers.indexOf('[')+1,numbers.indexOf(']'));
+                int totalDelimiters = StringUtils.countMatches(numbers, "[");
+                for(int i=0;i<totalDelimiters;i++){
+                    delimiter += numbers.substring(numbers.indexOf('[')+1,numbers.indexOf(']'));
+                    numbers = numbers.substring(numbers.indexOf("]")+1);
                 }
-                else{
+                if(delimiter.length()==1 || totalDelimiters == 0){
                     delimiter = Character.toString(numbers.charAt(2));
                 }
                 numbers = numbers.substring(numbers.indexOf("\n")+1);

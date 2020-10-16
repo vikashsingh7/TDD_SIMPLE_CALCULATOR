@@ -3,6 +3,7 @@ package calculatorTestPackage;
 import calculatorPackage.StringCalculator;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class StringCalculatorTest {
 
@@ -64,11 +65,11 @@ public class StringCalculatorTest {
     public void shouldReturnCalledCount(){
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(0,stringCalculator.getCalledCount());
-        assertEquals(-1,StringCalculator.add("-12,-1,45"));
+        StringCalculator.add("-12,-1,45");
         assertEquals(1,stringCalculator.getCalledCount());
-        assertEquals(444, StringCalculator.add("93,68,99,151,33"));
-        assertEquals(1100, StringCalculator.add("9,37,6,87,873,6,8,14,60"));
-        assertEquals(3,stringCalculator.getCalledCount());
+        StringCalculator.add("93,68,99,151,33");
+        StringCalculator.add("9,37,6,87,873,6,8,14,60");
+        assertEquals(3, stringCalculator.getCalledCount());
     }
 
     @Test
@@ -85,5 +86,12 @@ public class StringCalculatorTest {
         assertEquals(6,StringCalculator.add("//[***]\n1***2***3"));
         assertEquals(6,StringCalculator.add("//[(]\n1(2(3"));
         assertEquals(6,StringCalculator.add("//[!!]\n1!!2!!3"));
+    }
+
+    @Test
+    public void shouldHandleMultipleDelimitersOfAnySize(){
+        assertEquals(6,StringCalculator.add("//[*][%]\n1*2%3"));
+        assertEquals(99,StringCalculator.add("//[#][#]\n81#12#6"));
+        assertEquals(48,StringCalculator.add("//[*][`]\n1*2`45"));
     }
 }
