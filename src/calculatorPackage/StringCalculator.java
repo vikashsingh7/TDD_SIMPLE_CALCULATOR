@@ -41,6 +41,9 @@ public class StringCalculator {
                     negativeNumber.append(item.substring(item.indexOf('-'))).append(",");
                     continue;
                 }
+                else if(Integer.parseInt(item)>1000){
+                    continue;
+                }
                 result += Integer.parseInt(item);
             }
         }

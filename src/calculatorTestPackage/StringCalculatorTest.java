@@ -26,11 +26,9 @@ public class StringCalculatorTest {
 
     @Test
     public void shouldHandleUnknownAmountOfNumbers(){
-        assertEquals(999999999, StringCalculator.add("999999999"));
-        assertEquals(999999999, StringCalculator.add("931531511,68468488"));
         assertEquals(444, StringCalculator.add("93,68,99,151,33"));
-        assertEquals(7100, StringCalculator.add("9,37,6,87,6873,6,8,14,60"));
-        assertEquals(98683, StringCalculator.add("9,37,6,87,6873,6,8,14,60,45,4,23,2345,34,3434,85667,6,22,3"));
+        assertEquals(1100, StringCalculator.add("9,37,6,87,873,6,8,14,60"));
+        assertEquals(1237, StringCalculator.add("9,37,6,87,873,6,8,14,60,45,4,23,2345,34,3434,85667,6,22,3"));
     }
 
     @Test
@@ -69,7 +67,16 @@ public class StringCalculatorTest {
         assertEquals(-1,StringCalculator.add("-12,-1,45"));
         assertEquals(1,stringCalculator.getCalledCount());
         assertEquals(444, StringCalculator.add("93,68,99,151,33"));
-        assertEquals(7100, StringCalculator.add("9,37,6,87,6873,6,8,14,60"));
+        assertEquals(1100, StringCalculator.add("9,37,6,87,873,6,8,14,60"));
         assertEquals(3,stringCalculator.getCalledCount());
+    }
+
+    @Test
+    public void shouldNotAddNumbersGreaterThan1000(){
+        assertEquals(0, StringCalculator.add("999999999"));
+        assertEquals(0, StringCalculator.add("931531511,68468488"));
+        assertEquals(68, StringCalculator.add("931531511,68"));
+        assertEquals(44, StringCalculator.add("44,684684,1288,1001"));
+        assertEquals(1237, StringCalculator.add("9,37,6,87,873,6,8,14,60,45,4,23,2345,34,3434,85667,6,22,3"));
     }
 }
