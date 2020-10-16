@@ -16,8 +16,13 @@ public class StringCalculator {
         else{
             numbers = numbers.replaceAll(" ","");   //Replacing Blank Spaces
             if(numbers.startsWith("//")){
-                delimiter = Character.toString(numbers.charAt(2));
-                numbers = numbers.substring(4);
+                if(numbers.charAt(2) == '[' && numbers.contains("]")){
+                    delimiter = numbers.substring(numbers.indexOf('[')+1,numbers.indexOf(']'));
+                }
+                else{
+                    delimiter = Character.toString(numbers.charAt(2));
+                }
+                numbers = numbers.substring(numbers.indexOf("\n")+1);
             }
             numberArray = splitNumbers(numbers,delimiter);
             try{

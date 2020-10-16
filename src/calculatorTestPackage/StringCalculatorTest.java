@@ -79,4 +79,11 @@ public class StringCalculatorTest {
         assertEquals(44, StringCalculator.add("44,684684,1288,1001"));
         assertEquals(1237, StringCalculator.add("9,37,6,87,873,6,8,14,60,45,4,23,2345,34,3434,85667,6,22,3"));
     }
+
+    @Test
+    public void shouldHandleDelimiterOfAnySize(){
+        assertEquals(6,StringCalculator.add("//[***]\n1***2***3"));
+        assertEquals(6,StringCalculator.add("//[(]\n1(2(3"));
+        assertEquals(6,StringCalculator.add("//[!!]\n1!!2!!3"));
+    }
 }
